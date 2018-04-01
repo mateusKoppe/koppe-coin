@@ -25,6 +25,11 @@ class Block {
     return SHA256(`${timestamp}${lastHash}${data}`)
   }
 
+  static generateBlockHash (block) {
+    const {timestamp, lastHash, data} = block
+    return Block.generateHash(timestamp, lastHash, data)
+  }
+
   static mineBlock (lastBlock, data) {
     const timestamp = Date.now()
     const lastHash = lastBlock.hash
