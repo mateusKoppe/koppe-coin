@@ -22,7 +22,7 @@ class Block {
   }
 
   static generateHash (timestamp, lastHash, data) {
-    return SHA256(`${timestamp}${lastHash}${data}`)
+    return SHA256(`${timestamp}${lastHash}${data}`).toString()
   }
 
   static generateBlockHash (block) {
