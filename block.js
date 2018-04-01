@@ -14,6 +14,10 @@ class Block {
       Data     : ${this.data}
     `
   }
+
+  static genesis () {
+    return new this(0, '', 'first-hash', [])
+  }
 }
 
 module.exports = Block
