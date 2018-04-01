@@ -24,6 +24,13 @@ class Block {
   static generateHash (timestamp, lastHash, data) {
     return SHA256(`${timestamp}${lastHash}${data}`)
   }
+
+  static mineBlock (lastBlock, data) {
+    const timestamp = Date.now()
+    const lastHash = lastBlock.hash
+    const hash = Block.generateHash(timestamp, lastHash, data)
+    return new this(timestamp, lastHash, hash, data)
+  }
 }
 
 module.exports = Block
