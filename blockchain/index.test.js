@@ -2,10 +2,11 @@ const Blockchain = require('./index')
 const Block = require('./block')
 
 describe('blockchain', () => {
-  let blockchain
+  let blockchain, blockchain2
 
   beforeEach(() => {
     blockchain = new Blockchain()
+    blockchain2 = new Blockchain()
   })
 
   it('starts with the genesis block', () => {
@@ -42,5 +43,17 @@ describe('blockchain', () => {
     blockchain.addBlock('bar')
     blockchain.chain[2].data = 'INVALID DATA'
     expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
+  })
+
+  it('replace the chain with a valid chain', () => {
+    blockchain2.addBlock('foo')
+    blockchain.replaceChain(blockchain2.chain)
+    expect(blockchain.chain).toEqual(blockchain2.chain)
+  })
+
+  it('doesnt replace smaller or equals chains', () => {
+    blockchain.addBlock('foo')
+    blockchain.replaceChain(blockchain2.chain)
+    expect(blockchain.chain.length).not.toEqual(blockchain2.chain)
   })
 })
