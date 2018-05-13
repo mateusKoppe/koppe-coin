@@ -36,4 +36,11 @@ describe('blockchain', () => {
     blockchain.chain[1].data = 'INVALID DATA'
     expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
   })
+
+  it('invalidates a corrupt chain with more than one block', () => {
+    blockchain.addBlock('foo')
+    blockchain.addBlock('bar')
+    blockchain.chain[2].data = 'INVALID DATA'
+    expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
+  })
 })
