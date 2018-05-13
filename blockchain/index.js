@@ -25,6 +25,16 @@ class Blockchain {
 
     return true
   }
+
+  replaceChain (newChain) {
+    const isChainBigger = newChain.length <= this.chain.length
+    const isChainValid = !Blockchain.isValidChain(newChain)
+    if (isChainBigger || isChainValid) {
+      return
+    }
+
+    this.chain = newChain
+  }
 }
 
 module.exports = Blockchain
