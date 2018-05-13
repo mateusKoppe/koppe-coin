@@ -4,7 +4,7 @@ const Block = require('./block')
 describe('blockchain', () => {
   let blockchain
 
-  beforeAll(() => {
+  beforeEach(() => {
     blockchain = new Blockchain()
   })
 
@@ -28,12 +28,12 @@ describe('blockchain', () => {
 
   it('invalidates corrupt genesis block', () => {
     blockchain.chain[0].hash = 'INVALID HASH'
-    expect(Blockchain.isValidChain(blockchain)).toBe(false)
+    expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
   })
 
   it('invalidates corrupt chain', () => {
     blockchain.addBlock('foo')
     blockchain.chain[1].data = 'INVALID DATA'
-    expect(Blockchain.isValidChain(blockchain)).toBe(false)
+    expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
   })
 })
