@@ -21,9 +21,9 @@ class Blockchain {
 
       if (block.lastHash !== lastBlock.hash ||
         block.hash !== Block.generateBlockHash(block)) return false
-
-      return true
     }
+
+    return true
   }
 }
 
