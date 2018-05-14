@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const Blockchain = require('../blockchain')
 const P2pServer = require('./p2p-server')
+const { DEFAULT_HTTP_PORT } = require('../config')
 
-const HTTP_PORT = process.env.HTTP_PORT || 3001
+const HTTP_PORT = process.env.HTTP_PORT || DEFAULT_HTTP_PORT
 
 const app = express()
 const blockchain = new Blockchain()

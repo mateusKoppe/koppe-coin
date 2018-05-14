@@ -1,6 +1,7 @@
 const Websocket = require('ws')
+const { DEFAULT_P2P_PORT } = require('../config')
 
-const P2P_PORT = process.env.P2P_PORT || 5001
+const P2P_PORT = process.env.P2P_PORT || DEFAULT_P2P_PORT
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : []
 
 class P2pServer {
