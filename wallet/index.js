@@ -6,6 +6,13 @@ class Wallet {
     this.keyPair = null
     this.publicKey = null
   }
+
+  toString () {
+    return ` Wallet -
+      publicKey: ${this.publicKey}
+      balance  : ${this.balance}
+    `
+  }
 }
 
 module.exports = Wallet
