@@ -4,7 +4,7 @@ class Transaction {
   constructor () {
     this.id = ChailUtil.id()
     this.input = null
-    this.output = []
+    this.outputs = []
   }
 
   static newTrasaction (senderWallet, recipient, amount) {
@@ -14,7 +14,7 @@ class Transaction {
       throw new Error(`Amount exceeds balance`)
     }
 
-    transaction.output.push(...[
+    transaction.outputs.push(...[
       { amount: senderWallet.balance - amount, address: senderWallet.publicKey },
       { amount, address: recipient }
     ])
