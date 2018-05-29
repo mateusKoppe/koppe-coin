@@ -1,6 +1,6 @@
 const ChailUtil = require('../chain-util')
 
-class Transation {
+class Transaction {
   constructor () {
     this.id = ChailUtil.id()
     this.input = null
@@ -8,19 +8,19 @@ class Transation {
   }
 
   static newTrasaction (senderWallet, recipient, amount) {
-    const transation = new this()
+    const transaction = new this()
 
     if (amount > senderWallet.balance) {
       throw new Error(`Amount exceeds balance`)
     }
 
-    transation.output.push(...[
+    transaction.output.push(...[
       { amount: senderWallet.balance - amount, address: senderWallet.publicKey },
       { amount, address: recipient }
     ])
 
-    return transation
+    return transaction
   }
 }
 
-module.exports = Transation
+module.exports = Transaction
