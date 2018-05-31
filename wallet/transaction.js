@@ -7,6 +7,22 @@ class Transaction {
     this.outputs = []
   }
 
+  update (senderWallet, recipient, amount) {
+    const senderOutput = this.outputs.find(output => {
+      return output.address === senderWallet.publicKey
+    })
+
+    if (amount > senderOutput.amount) {
+      return
+    }
+
+    senderOutput.amount = senderOutput.amount - amount
+    this.outputs.push({ amount, address: recipient })
+    Transaction.signTransaction(this, senderWallet)
+
+    return this
+  }
+
   static newTrasaction (senderWallet, recipient, amount) {
     const transaction = new this()
 
