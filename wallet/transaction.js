@@ -23,7 +23,7 @@ class Transaction {
     return this
   }
 
-  static newTrasaction (senderWallet, recipient, amount) {
+  static newTransaction (senderWallet, recipient, amount) {
     const transaction = new this()
 
     if (amount > senderWallet.balance) {
