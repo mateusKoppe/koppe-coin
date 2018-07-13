@@ -28,6 +28,12 @@ app.get('/public-key', (req, res) => {
   })
 })
 
+app.get('/balance', (req, res) => {
+  res.json({
+    balance: wallet.calculateBalance(blockchain)
+  })
+})
+
 app.post('/mine', (req, res) => {
   blockchain.addBlock(req.body.data)
   p2pServer.syncChains()
