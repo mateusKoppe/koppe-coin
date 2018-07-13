@@ -37,7 +37,7 @@ app.get('/transactions', (req, res) => {
   res.json(tp.transactions)
 })
 
-app.post('/transactions', (req, res) => {
+app.post('/transact', (req, res) => {
   const { recipient, amount } = req.body
   const transaction = wallet.createTransaction(recipient, amount, blockchain, tp)
   p2pServer.broadcastTransaction(transaction)
