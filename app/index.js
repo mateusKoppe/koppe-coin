@@ -29,8 +29,7 @@ app.post('/mine', (req, res) => {
 })
 
 app.get('/mine-transactions', (req, res) => {
-  const block = miner.mine()
-  console.log(block.toString())
+  miner.mine()
   res.redirect('/blocks')
 })
 
