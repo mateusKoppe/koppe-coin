@@ -26,7 +26,7 @@ class Transaction {
 
   static transactionWithOuputs (senderWallet, outputs) {
     const transaction = new this()
-    transaction.outputs.push(outputs)
+    transaction.outputs.push(...outputs)
     Transaction.signTransaction(transaction, senderWallet)
     return transaction
   }
