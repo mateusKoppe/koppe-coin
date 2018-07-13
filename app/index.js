@@ -22,6 +22,12 @@ app.get('/blocks', (req, res) => {
   res.json(blockchain.chain)
 })
 
+app.get('/public-key', (req, res) => {
+  res.json({
+    publicKey: wallet.publicKey
+  })
+})
+
 app.post('/mine', (req, res) => {
   blockchain.addBlock(req.body.data)
   p2pServer.syncChains()
