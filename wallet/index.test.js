@@ -1,22 +1,23 @@
 const Wallet = require('./index')
 const Blockchain = require('../blockchain')
 const TransactionPool = require('./transaction-pool')
+const { INITIAL_BALANCE } = require('../config')
 
 describe('Wallet', () => {
-  let wallet, tp
+  let wallet, tp, blockchain
 
   beforeEach(() => {
     wallet = new Wallet()
+    blockchain = new Blockchain()
     tp = new TransactionPool()
   })
 
   describe('creating a transaction', () => {
-    let transaction, sendAmount, recipient, blockchain
+    let transaction, sendAmount, recipient
 
     beforeEach(() => {
       sendAmount = 50
       recipient = 'r4nd0m-4adr355'
-      blockchain = new Blockchain()
       transaction = wallet.createTransaction(recipient, sendAmount, blockchain, tp)
     })
 
@@ -34,6 +35,31 @@ describe('Wallet', () => {
         expect(transaction.outputs.filter(output => output.address === recipient)
           .map(output => output.amount)).toEqual([sendAmount, sendAmount])
       })
+    })
+  })
+
+  describe('calculating a balance', () => {
+    let addBalance, repeatAdd, senderWallet
+
+    beforeEach(() => {
+      senderWallet = new Wallet()
+      addBalance = 100
+      repeatAdd = 3
+
+      for (let i = 0; i < repeatAdd; i++) {
+        senderWallet.createTransaction(wallet.publicKey, addBalance, blockchain, tp)
+      }
+      blockchain.addBlock(tp.transactions)
+    })
+
+    it('calculates the balance for the blockchain transactions matching the recipient', () => {
+      expect(wallet.calculateBalance(blockchain))
+        .toEqual(INITIAL_BALANCE + (addBalance * repeatAdd))
+    })
+
+    it('calculates the balance for the blockchain transactions matching the sender', () => {
+      expect(senderWallet.calculateBalance(blockchain))
+        .toEqual(INITIAL_BALANCE - (addBalance * repeatAdd))
     })
   })
 })
