@@ -1,4 +1,4 @@
-# WhateverCoin
+# KoppeCoin
 This is a cryptocurrency made just for study purposes. 
 
 ## Install
@@ -6,8 +6,8 @@ This is a NodeJs Projecto, so be sure you installed [node and npm](https://nodej
 
 To install the project you'll have to clone and install the dependencies, just run the commands bellow in your terminal:
 ```
-git clone https://github.com/mateusKoppe/WhateverCoin &&
-cd WhateverCoin &&
+git clone https://github.com/mateusKoppe/KoppeCoin &&
+cd KoppeCoin &&
 npm install
 ```
 
